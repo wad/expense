@@ -19,8 +19,10 @@ Project uses only:
 
 ## Necessary Improvements
 
-* Never use java.util.java, use Joda instead
+* Replace java.util.Date with Joda
 * Version the API endpoints
-* Currently just logging delete events to Mongo. Could use a log file instead.
+* Currently just logging delete events to Mongo. Could use log4j instead.
 * When logging delete events to Mongo, make it in two stages, second one to confirm, after the delete committed.
-* Getting records doesn't properly format the date as a string
+* Needs the unit tests, using mocks
+* Needs a couple of black-box full-stack integration tests, ideally with an in-memory MongoDB database of some sort
+* To handle queries with filters, it needs a way to structure filters with AND and OR, along with operations such as <, >, ==, !=, in, notIn, etc.

@@ -7,7 +7,7 @@ public class ExpenseServiceTest
 	@Test
 	public void testCreateExpense()
 	{
-		// todo: test with mocks, make sure validation is called
+		// todo
 	}
 
 	@Test

@@ -24,7 +24,7 @@ public class ExpenseValidationService
 			Expense originalExpense,
 			Expense expenseContainingUpdates)
 	{
-		if (originalExpense.getExpenseStatus() == ExpenseStatus.reimbursed)
+		if (originalExpense.getExpenseStatus() == ExpenseStatus.Reimbursed)
 			return OperationResult.failed("Cannot update reimbursed expenses.");
 
 		Long amount = expenseContainingUpdates.getExpenseAmountInCents();
@@ -36,7 +36,7 @@ public class ExpenseValidationService
 
 	public OperationResult validateForDelete(Expense expenseRead)
 	{
-		if (expenseRead.getExpenseStatus() != ExpenseStatus.newRecord)
+		if (expenseRead.getExpenseStatus() != ExpenseStatus.New)
 			return OperationResult.failed("Can only delete records with 'new' status.");
 
 		return OperationResult.succeeded();

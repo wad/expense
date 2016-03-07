@@ -34,7 +34,7 @@ public class Expense
 	public Expense()
 	{
 		// new records are always of this status
-		expenseStatus = ExpenseStatus.newRecord;
+		expenseStatus = ExpenseStatus.New;
 
 		comments = new ArrayList<>();
 	}
@@ -115,7 +115,7 @@ public class Expense
 	public ExpenseStatus getExpenseStatus()
 	{
 		if (expenseStatus == null)
-			return ExpenseStatus.newRecord;
+			return ExpenseStatus.New;
 		return expenseStatus;
 	}
 

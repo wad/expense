@@ -16,7 +16,7 @@ public class ExpenseTest
 		final String merchant = "m";
 		final Long amount = 123L;
 		Date date = new Date(11111L);
-		ExpenseStatus expenseStatus = ExpenseStatus.newRecord;
+		ExpenseStatus expenseStatus = ExpenseStatus.New;
 		List<String> comments = Arrays.asList("aaa", "bbb");
 		Expense expense = new Expense(merchant, amount, date, expenseStatus, comments);
 
@@ -24,11 +24,17 @@ public class ExpenseTest
 		assertEquals(amount, expense.getExpenseAmountInCents());
 		assertEquals(1.23f, expense.getExpenseAmountInDollars(), .01f);
 		assertEquals(date, expense.getDateOfExpense());
-		assertEquals(ExpenseStatus.newRecord, expense.getExpenseStatus());
+		assertEquals(ExpenseStatus.New, expense.getExpenseStatus());
 		assertEquals("aaa\nbbb", expense.getComment());
 		assertEquals(2, expense.getComments().size());
 		assertTrue(expense.getComments().contains("aaa"));
 		assertTrue(expense.getComments().contains("bbb"));
 		assertNull(expense.getId());
+	}
+
+	@Test
+	public void testUpdate()
+	{
+		// todo
 	}
 }
