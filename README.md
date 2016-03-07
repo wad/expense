@@ -10,7 +10,7 @@ Data is passed around via DTO objects.
 
 ## Assumptions Made
 
-This uses only this set of libraries:
+Project uses only:
 
 * Spring Boot
 * Spring Web dependency
@@ -22,4 +22,5 @@ This uses only this set of libraries:
 * Never use java.util.java, use Joda instead
 * Version the API endpoints
 * Currently just logging delete events to Mongo. Could use a log file instead.
-* When logging delete events to Mongo, make it in two stages, second one to confirm.
+* When logging delete events to Mongo, make it in two stages, second one to confirm, after the delete committed.
+* Getting records doesn't properly format the date as a string

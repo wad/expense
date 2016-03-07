@@ -24,8 +24,9 @@ public class DemoApplication
 
 /*
 TODO LIST
+- retrieve expenses via filter
 - on GET, convert date to String
 - Make expense statuses use name
-- tests
-- extra credit
+- fill in the gaps in test code
+- implement basic auth
  */
