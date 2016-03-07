@@ -135,20 +135,22 @@ public class ExpenseController
 		try
 		{
 			String idFromExpense = expense.getId();
-			if (idFromExpense == null)
-				expense.setId(id);
+			boolean idsMatch = idFromExpense == null;
+			if (!idsMatch)
+				idsMatch = id.equals(idFromExpense);
 
-			if (!id.equals(idFromExpense))
+			if (idsMatch)
 			{
-				success = false;
-				result.put(JSON_LABEL_ERROR, "The id supplied in the expense didn't match the specified id.");
-			}
-			else
-			{
+				expense.setId(id);
 				OperationResult operationResult = expenseService.updateExpense(expense);
 				success = operationResult.wasSuccessful();
 				if (!success)
 					result.put(JSON_LABEL_ERROR, operationResult.getFailureExplanation());
+			}
+			else
+			{
+				success = false;
+				result.put(JSON_LABEL_ERROR, "The id supplied in the expense didn't match the specified id.");
 			}
 		}
 		catch (Throwable t)

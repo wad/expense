@@ -24,12 +24,8 @@ public class DemoApplication
 
 /*
 TODO LIST
-- Make sure expense statuses use name
-- add logging (another mongo collection)
-
-- delete - log that it happened
-
-- update README
+- on GET, convert date to String
+- Make expense statuses use name
 - tests
 - extra credit
  */

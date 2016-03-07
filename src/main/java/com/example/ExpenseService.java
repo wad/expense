@@ -3,6 +3,7 @@ package com.example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -10,6 +11,9 @@ public class ExpenseService
 {
 	@Autowired
 	ExpenseDao expenseDao;
+
+	@Autowired
+	DeletionLogDao deletionLogDao;
 
 	@Autowired
 	ExpenseValidationService expenseValidationService;
@@ -69,6 +73,7 @@ public class ExpenseService
 		if (!validationResult.wasSuccessful())
 			return validationResult;
 
+		deletionLogDao.insert(new DeletionLog(id, new Date()));
 		expenseDao.delete(id);
 
 		return OperationResult.succeeded();
