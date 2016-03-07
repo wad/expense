@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExpenseValidationService
 {
-	public OperationResult validateAsNewExpense(Expense expense)
+	public OperationResult validateForNewExpense(Expense expense)
 	{
 		if (expense.getExpenseAmountInCents() < 0)
 			return OperationResult.failed("Negative expense amount detected");
@@ -20,7 +20,7 @@ public class ExpenseValidationService
 		return OperationResult.succeeded();
 	}
 
-	public OperationResult validateUpdate(
+	public OperationResult validateForUpdate(
 			Expense originalExpense,
 			Expense expenseContainingUpdates)
 	{
@@ -30,6 +30,14 @@ public class ExpenseValidationService
 		Long amount = expenseContainingUpdates.getExpenseAmountInCents();
 		if (amount != null && amount < 0)
 			return OperationResult.failed("Cannot update to a negative expense amount.");
+
+		return OperationResult.succeeded();
+	}
+
+	public OperationResult validateForDelete(Expense expenseRead)
+	{
+		if (expenseRead.getExpenseStatus() != ExpenseStatus.newRecord)
+			return OperationResult.failed("Can only delete records with 'new' status.");
 
 		return OperationResult.succeeded();
 	}

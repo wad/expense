@@ -3,6 +3,8 @@ package com.example;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ExpenseDao extends MongoRepository<Expense, String>
 {
@@ -14,4 +16,10 @@ public interface ExpenseDao extends MongoRepository<Expense, String>
 
 	@Override
 	Expense findOne(String id);
+
+	@Override
+	List<Expense> findAll();
+
+	@Override
+	void delete(String id);
 }

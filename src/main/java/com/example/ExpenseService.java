@@ -3,6 +3,8 @@ package com.example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExpenseService
 {
@@ -14,7 +16,7 @@ public class ExpenseService
 
 	public OperationResult createExpense(Expense expense)
 	{
-		OperationResult operationResult = expenseValidationService.validateAsNewExpense(expense);
+		OperationResult operationResult = expenseValidationService.validateForNewExpense(expense);
 		if (!operationResult.wasSuccessful())
 			return operationResult;
 
@@ -31,13 +33,18 @@ public class ExpenseService
 		return expenseDao.findOne(id);
 	}
 
+	public List<Expense> getAllExpenses()
+	{
+		return expenseDao.findAll();
+	}
+
 	public OperationResult updateExpense(Expense expense)
 	{
 		Expense expenseRead = expenseDao.findOne(expense.getId());
 		if (expenseRead == null)
 			return OperationResult.failed("Could not find an expense with id " + expense.getId() + " to update.");
 
-		OperationResult validationResult = expenseValidationService.validateUpdate(expenseRead, expense);
+		OperationResult validationResult = expenseValidationService.validateForUpdate(expenseRead, expense);
 		if (!validationResult.wasSuccessful())
 			return validationResult;
 
@@ -48,6 +55,21 @@ public class ExpenseService
 		Expense expenseSaved = expenseDao.save(expenseRead);
 		if (expenseSaved == null)
 			return OperationResult.failed("Failed to persist update for unknown reason.");
+
+		return OperationResult.succeeded();
+	}
+
+	public OperationResult deleteExpense(String id)
+	{
+		Expense expenseRead = expenseDao.findOne(id);
+		if (expenseRead == null)
+			return OperationResult.failed("Could not find an expense with id " + id + " to delete.");
+
+		OperationResult validationResult = expenseValidationService.validateForDelete(expenseRead);
+		if (!validationResult.wasSuccessful())
+			return validationResult;
+
+		expenseDao.delete(id);
 
 		return OperationResult.succeeded();
 	}
