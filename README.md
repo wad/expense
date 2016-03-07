@@ -12,4 +12,5 @@ todo
 
 ## Necessary Improvements
 
-todo
+* Never use java.util.java, use Joda instead
+* Version the API endpoints

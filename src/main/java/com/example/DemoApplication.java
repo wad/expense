@@ -21,3 +21,18 @@ public class DemoApplication
 		System.out.println("=============");
 	}
 }
+
+/*
+TODO LIST
+- Make sure expense statuses use name
+- add logging (another mongo collection)
+
+- retrieve - GET on expense/{id}
+- retrieve - GET on expenses/ returns all of them (JSON array)
+- delete - Can only delete records with "new" status
+- delete - DELETE on expense/id - returns id, and "status":"deleted"
+- delete - log that it happened
+- update README
+- tests
+- extra credit
+ */
